@@ -1,7 +1,7 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
-import { isDarkAtom } from "../state/atoms";
+import { isDarkAtom, todoState } from "../state/atoms";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -17,10 +17,18 @@ const TodoList = () => {
     formState: { errors },
   } = useForm();
 
-  const onValid = (data: any) => {
-    console.log(data);
+  // const todoList = useRecoilValue(todoState);
+  // const modifyTodo = useSetRecoilState(todoState);
+  const [todo, setTodo] = useRecoilState(todoState);
+
+  const handleValid = ({ todo }: any) => {
+    setTodo((prev) => [
+      { text: todo, id: Date.now(), category: "TO_DO" },
+      ...prev,
+    ]);
   };
 
+  console.log(todo);
   return (
     <>
       <Header>
@@ -28,7 +36,7 @@ const TodoList = () => {
       </Header>
       <Container>
         <div className="form-area">
-          <form onSubmit={handleSubmit(onValid)}>
+          <form onSubmit={handleSubmit(handleValid)}>
             <input
               {...register("todo", { required: "필수 입력" })}
               type="text"
@@ -38,46 +46,16 @@ const TodoList = () => {
           </form>
           <span>{errors.todo?.type === "required" && "입력"}</span>
         </div>
+        <div>
+          <ul className="todo-list">
+            {todo.map((item) => (
+              <li key={item.id}>{item.text}</li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </>
   );
 };
-
-// const TodoList = () => {
-//   const [value, setValue] = useState("");
-//   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-//     const {
-//       currentTarget: { value },
-//     } = event;
-
-//     setValue(value);
-//   };
-
-//   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-//     event.preventDefault();
-//     console.log(value);
-//   };
-
-//   return (
-//     <>
-//       <Header>
-//         <h1>내가 가고 싶은 나라들</h1>
-//       </Header>
-//       <Container>
-//         <div className="form-area">
-//           <form onSubmit={handleSubmit}>
-//             <input
-//               value={value}
-//               onChange={handleChange}
-//               type="text"
-//               placeholder="write to do"
-//             />
-//             <button>Add</button>
-//           </form>
-//         </div>
-//       </Container>
-//     </>
-//   );
-// };
 
 export default TodoList;
