@@ -10,13 +10,16 @@ const TodoList = () => {
   //watch: form의 입력값들의 변화를 관찰할 수 있게 해 주는 함수
   //handleSubmit: 밸리데이션 담당
   //handleSubmit(데이터가 유효할 때 함수, 데이터가 유효하지 않을 때 호출 함수)
-  const { register, watch, handleSubmit, formState } = useForm();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onValid = (data: any) => {
     console.log(data);
   };
-
-  console.log(formState.errors);
 
   return (
     <>
@@ -33,6 +36,7 @@ const TodoList = () => {
             />
             <button>Add</button>
           </form>
+          <span>{errors.todo?.type === "required" && "입력"}</span>
         </div>
       </Container>
     </>
