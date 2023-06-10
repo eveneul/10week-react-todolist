@@ -22,7 +22,7 @@ const TodoList = () => {
   return (
     <>
       <Wrapper>
-        <Box variants={animation} />
+        <Box variants={animation} initial="start" animate="end" />
         {/* <motion.div></motion.div> */}
       </Wrapper>
     </>
