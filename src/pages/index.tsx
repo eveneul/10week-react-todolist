@@ -7,22 +7,22 @@ import { Box } from "../components/box";
 import { motion } from "framer-motion";
 
 const TodoList = () => {
+  const animation = {
+    start: { scale: 0 },
+    end: {
+      scale: 1,
+      rotateZ: 360,
+      transition: {
+        type: "spring",
+        damping: 10,
+      },
+    },
+  };
+
   return (
     <>
       <Wrapper>
-        <Box
-          initial={{
-            scale: 0,
-          }}
-          animate={{
-            scale: 1,
-            rotateZ: 360,
-          }}
-          transition={{
-            type: "spring",
-            damping: 10,
-          }}
-        />
+        <Box variants={animation} />
         {/* <motion.div></motion.div> */}
       </Wrapper>
     </>
