@@ -1,12 +1,14 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom, todoState } from "../state/atoms";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Wrapper } from "../components/wrapper";
-import { Box, Circle } from "../components/box";
+import { BiggerBox, Box, Circle } from "../components/box";
 import { motion } from "framer-motion";
 
 const TodoList = () => {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
+
   const boxAnimation = {
     hover: {
       scale: 1.5,
@@ -24,13 +26,16 @@ const TodoList = () => {
   return (
     <>
       <Wrapper>
-        <Box
-          drag
-          variants={boxAnimation}
-          whileHover="hover"
-          whileTap="click"
-          whileDrag="drag"
-        ></Box>
+        <BiggerBox ref={biggerBoxRef}>
+          <Box
+            drag
+            dragConstraints={biggerBoxRef}
+            variants={boxAnimation}
+            whileHover="hover"
+            whileTap="click"
+            whileDrag="drag"
+          ></Box>
+        </BiggerBox>
       </Wrapper>
     </>
   );
