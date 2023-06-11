@@ -7,21 +7,21 @@ import { Box, Circle } from "../components/box";
 import { motion } from "framer-motion";
 
 const TodoList = () => {
-  const boxAnimation = {};
+  const boxAnimation = {
+    hover: {
+      scale: 1.5,
+      rotateZ: 90,
+    },
+    click: {
+      borderRadius: "100px",
+      scale: 1,
+    },
+  };
 
   return (
     <>
       <Wrapper>
-        <Box
-          whileHover={{
-            scale: 1.5,
-            rotateZ: 90,
-          }}
-          whileTap={{
-            borderRadius: "100px",
-            scale: 1,
-          }}
-        ></Box>
+        <Box variants={boxAnimation} whileHover="hover" whileTap="click"></Box>
       </Wrapper>
     </>
   );
