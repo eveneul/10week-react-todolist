@@ -30,6 +30,8 @@ const TodoList = () => {
           <Box
             drag
             dragConstraints={biggerBoxRef}
+            dragSnapToOrigin
+            dragElastic={0.5}
             variants={boxAnimation}
             whileHover="hover"
             whileTap="click"
