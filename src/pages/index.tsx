@@ -4,40 +4,16 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Wrapper } from "../components/wrapper";
 import { BiggerBox, Box, Circle } from "../components/box";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 const TodoList = () => {
-  const biggerBoxRef = useRef<HTMLDivElement>(null);
-
-  const boxAnimation = {
-    hover: {
-      scale: 1.5,
-      rotateZ: 90,
-    },
-    click: {
-      borderRadius: "100px",
-      scale: 1,
-    },
-    drag: {
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-    },
-  };
-
+  const x = useMotionValue(0);
+  console.log(x);
   return (
     <>
       <Wrapper>
-        <BiggerBox ref={biggerBoxRef}>
-          <Box
-            drag
-            dragConstraints={biggerBoxRef}
-            dragSnapToOrigin
-            dragElastic={0.5}
-            variants={boxAnimation}
-            whileHover="hover"
-            whileTap="click"
-            whileDrag="drag"
-          ></Box>
-        </BiggerBox>
+        <button onClick={() => x.set(200)}>click me</button>
+        <Box style={{ x }}></Box>
       </Wrapper>
     </>
   );
