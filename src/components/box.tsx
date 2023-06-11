@@ -4,9 +4,7 @@ import { styled } from "styled-components";
 export const Box = styled(motion.div)`
   width: 200px;
   height: 200px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 30px;
 `;
 
