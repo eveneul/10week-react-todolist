@@ -16,12 +16,21 @@ const TodoList = () => {
       borderRadius: "100px",
       scale: 1,
     },
+    drag: {
+      backgroundColor: "rgba(0, 0, 0, 0.4)",
+    },
   };
 
   return (
     <>
       <Wrapper>
-        <Box variants={boxAnimation} whileHover="hover" whileTap="click"></Box>
+        <Box
+          drag
+          variants={boxAnimation}
+          whileHover="hover"
+          whileTap="click"
+          whileDrag="drag"
+        ></Box>
       </Wrapper>
     </>
   );
